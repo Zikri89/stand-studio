@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="platNomor">Plat Nomor</label>
-                                        <input type="text" class="form-control" name="platNomor" placeholder="Plat Nomor" />
+                                        <input type="text" class="form-control platNomor" name="platNomor" placeholder="Plat Nomor" />
                                     </div>
                                 </div> 
                                 <input type="button" name="next" class="next action-button" value="Next Step" />
