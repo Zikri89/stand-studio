@@ -19,32 +19,38 @@ use App\Http\Controllers\TrackingController;
 */
 
 //Login & Register
-Route::get('/', [LoginController::class, 'create'])->middleware('guest');
-Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
-Route::post('ajax-register', [RegisterController::class, 'store'])->middleware('guest');
-Route::get('login', [LoginController::class, 'create'])->middleware('guest');
-Route::post('ajax-login', [LoginController::class, 'check_login'])->middleware('guest');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/', [LoginController::class, 'create']);
+    Route::get('register', [RegisterController::class, 'create']);
+    Route::post('ajax-register', [RegisterController::class, 'store']);
+    Route::get('login', [LoginController::class, 'create'])->name('login');
+    Route::post('ajax-login', [LoginController::class, 'check_login']);
+});
+
 //End Login & Register
-Route::get('logOut', [LoginController::class, 'destroy']);
-Route::get('dashboard', [DashboardController::class, 'create']);
-//Product
-Route::get('create/product', [ProductController::class, 'index'])->name('product');
-Route::get('list/product', [ProductController::class, 'create'])->name('list-product');
-Route::get('dataProduct', [ProductController::class, 'createProduct'])->name('dataProduct');
-Route::get('edit/product/{ids}', [ProductController::class, 'edit']);
-Route::post('ajax-edit-product', [ProductController::class, 'update']);
-Route::post('ajax-delete-product', [ProductController::class, 'destroy']);
-Route::get('createTruckTypeJson', [ProductController::class, 'createTruckTypeJson']);
-Route::get('createTruckBrandJson', [ProductController::class, 'createTruckBrandJson']);
-Route::get('createBrandJson', [ProductController::class, 'createBrandJson']);
-Route::post('ajax-order-product', [ProductController::class, 'store']);
-//End Product
-//Master
-Route::get('create', [MasterController::class, 'create'])->name('master');
-Route::post('ajax-order', [MasterController::class, 'store']);
-Route::post('ajax-order-truck-brand', [MasterController::class, 'storeTruckBrand']);
-Route::post('ajax-order-truck-type', [MasterController::class, 'storeTruckType']);
-//End Master
-//Tracking
-Route::get('tracking', [TrackingController::class, 'create'])->middleware('auth');
-Route::get('trackingProduct', [TrackingController::class, 'createProduct']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('logOut', [LoginController::class, 'destroy']);
+    Route::get('dashboard', [DashboardController::class, 'create']);
+    //Product
+    Route::get('create/product', [ProductController::class, 'index'])->name('product');
+    Route::get('list/product', [ProductController::class, 'create'])->name('list-product');
+    Route::get('dataProduct', [ProductController::class, 'createProduct'])->name('dataProduct');
+    Route::get('edit/product/{ids}', [ProductController::class, 'edit']);
+    Route::post('ajax-edit-product', [ProductController::class, 'update']);
+    Route::post('ajax-delete-product', [ProductController::class, 'destroy']);
+    Route::get('createTruckTypeJson', [ProductController::class, 'createTruckTypeJson']);
+    Route::get('createTruckBrandJson', [ProductController::class, 'createTruckBrandJson']);
+    Route::get('createBrandJson', [ProductController::class, 'createBrandJson']);
+    Route::post('ajax-order-product', [ProductController::class, 'store']);
+    //End Product
+    //Master
+    Route::get('create', [MasterController::class, 'create'])->name('master');
+    Route::post('ajax-order', [MasterController::class, 'store']);
+    Route::post('ajax-order-truck-brand', [MasterController::class, 'storeTruckBrand']);
+    Route::post('ajax-order-truck-type', [MasterController::class, 'storeTruckType']);
+    //End Master
+    //Tracking
+    Route::get('tracking', [TrackingController::class, 'create']);
+    Route::get('trackingProduct', [TrackingController::class, 'createProduct']);
+});
+
