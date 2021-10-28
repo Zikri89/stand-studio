@@ -7,6 +7,7 @@
 4. php artisan migrate (Jangan lupa untuk set up database nya)
 5. php artisan db:seed RolesSeeder
 6. php artisan db:seed UserSeeder
+7. Setelah aplikasi running, langkah pertama buat data master terlebih dahulu pada menu Master->create data
 
 # Login
 Email : zikri@gmail.com <br>
